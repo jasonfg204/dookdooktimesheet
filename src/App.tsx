@@ -1,4 +1,4 @@
-import { useAppContext } from './context/AppContext.tsx';
+import { useAppContext } from './context/AppContext';
 import LoginPage from './pages/LoginPage';
 import LogHoursPage from './pages/LogHoursPage';
 import SummaryPage from './pages/SummaryPage';

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { collection, addDoc, doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase/firebaseConfig';
-import { useAppContext } from '../context/AppContext.tsx';
+import { useAppContext } from '../context/AppContext';
 import './styles/LogHoursPage.css';
 
 const LogHoursPage: React.FC = () => {

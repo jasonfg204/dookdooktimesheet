@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { collection, query, orderBy, onSnapshot, where, doc, deleteDoc } from 'firebase/firestore';
 import { httpsCallable } from 'firebase/functions';
 import { db, functions } from '../firebase/firebaseConfig';
-import { useAppContext } from '../context/AppContext.tsx';
+import { useAppContext } from '../context/AppContext';
 import FilterContainer from '../components/FilterContainer';
 import './styles/EntriesListPage.css';
 

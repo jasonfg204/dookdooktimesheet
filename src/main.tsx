@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import { AppProvider } from './context/AppContext.tsx'
+import App from './App'
+import { AppProvider } from './context/AppContext'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -11,8 +11,8 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>,
 )
 
-// Register service worker
-if ('serviceWorker' in navigator) {
+// Register service worker only in production
+if ('serviceWorker' in navigator && import.meta.env.MODE === 'production') {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/service-worker.js')
       .then(registration => {

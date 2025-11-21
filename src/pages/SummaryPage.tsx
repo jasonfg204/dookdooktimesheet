@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/firebaseConfig';
-import { useAppContext } from '../context/AppContext.tsx';
+import { useAppContext } from '../context/AppContext';
 import './styles/SummaryPage.css';
 import FilterContainer from '../components/FilterContainer';
 
