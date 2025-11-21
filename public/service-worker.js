@@ -140,7 +140,7 @@ const networkFirst = async (request, cacheName, limit) => {
   } catch (error) {
     console.log(`Network failed for ${request.url}, trying cache.`);
     const cache = await caches.open(cacheName);
-    const cachedResponse = await caches.match(request);
+    const cachedResponse = await cache.match(request);
     if (cachedResponse) {
       return cachedResponse;
     }
