@@ -1,0 +1,107 @@
+.entries-list-page h2 {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  font-weight: 600;
+}
+
+.entries-table-container {
+  background-color: var(--card-background-color);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  overflow: hidden; /* Ensures the border-radius is applied to the table corners */
+}
+
+.entries-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.entries-table th,
+.entries-table td {
+  padding: var(--spacing-md);
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.entries-table thead th {
+  background-color: var(--background-color);
+  font-weight: 600;
+  color: var(--subtle-text-color);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.entries-table tbody tr:hover {
+  background-color: var(--background-color);
+}
+
+.entries-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.no-entries-message {
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: var(--subtle-text-color);
+}
+
+/* --- Mobile-Friendly Card View --- */
+@media (max-width: 768px) {
+  .entries-table thead {
+    /* Hide the table header on mobile, the labels are in the cells */
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .entries-table-container {
+    /* On mobile, the container is transparent and each row is its own card */
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .entries-table tr {
+    display: block;
+    margin-bottom: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    background-color: var(--card-background-color);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+  }
+  
+  .entries-table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px dashed var(--border-color);
+    white-space: normal;
+  }
+
+  .entries-table td:last-child {
+    border-bottom: none;
+  }
+
+  .entries-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-color);
+    padding-right: var(--spacing-md);
+  }
+  
+  /* Special handling for notes to allow them to wrap */
+  .entries-table td[data-label="Notes"] {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+    padding-top: var(--spacing-md);
+  }
+}
