@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/firebaseConfig';
 import { useAppContext } from '../context/AppContext';
@@ -13,7 +13,7 @@ interface SummaryData {
   [userId: string]: number;
 }
 
-const SummaryPage: React.FC = () => {
+const SummaryPage = () => {
   const { users, year, month, selectedUserId } = useAppContext();
   const [summary, setSummary] = useState<SummaryData>({});
   const [loading, setLoading] = useState(true);

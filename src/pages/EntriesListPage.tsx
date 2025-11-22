@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { collection, query, orderBy, onSnapshot, where, doc, deleteDoc } from 'firebase/firestore';
 import { httpsCallable } from 'firebase/functions';
 import { db, functions } from '../firebase/firebaseConfig';
@@ -17,7 +17,7 @@ interface Entry {
   notes?: string;
 }
 
-const EntriesListPage: React.FC = () => {
+const EntriesListPage = () => {
   const { isAdmin, users, selectedUserId, year, month, setCurrentPage, setEditingEntryId } = useAppContext();
   const [entries, setEntries] = useState<Entry[]>([]);
   const [loading, setLoading] = useState(true);

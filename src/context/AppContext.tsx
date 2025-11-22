@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import { createContext, useState, useEffect, useContext, type ReactNode, type Dispatch, type SetStateAction } from 'react';
 import type { User } from 'firebase/auth';
 import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, setDoc, collection, getDocs } from 'firebase/firestore';
@@ -18,20 +18,20 @@ interface AppContextType {
   users: UserData[];
   loading: boolean;
   selectedUserId: 'all' | string;
-  setSelectedUserId: React.Dispatch<React.SetStateAction<'all' | string>>;
+  setSelectedUserId: Dispatch<SetStateAction<'all' | string>>;
   year: number;
-  setYear: React.Dispatch<React.SetStateAction<number>>;
+  setYear: Dispatch<SetStateAction<number>>;
   month: number;
-  setMonth: React.Dispatch<React.SetStateAction<number>>;
+  setMonth: Dispatch<SetStateAction<number>>;
   currentPage: Page;
-  setCurrentPage: React.Dispatch<React.SetStateAction<Page>>;
+  setCurrentPage: Dispatch<SetStateAction<Page>>;
   editingEntryId: string | null;
-  setEditingEntryId: React.Dispatch<React.SetStateAction<string | null>>;
+  setEditingEntryId: Dispatch<SetStateAction<string | null>>;
 }
 
 export const AppContext = createContext<AppContextType | undefined>(undefined);
 
-export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [userRole, setUserRole] = useState<string | null>(null);
   const [users, setUsers] = useState<UserData[]>([]);

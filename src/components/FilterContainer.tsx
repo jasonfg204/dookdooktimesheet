@@ -1,8 +1,8 @@
-import React from 'react';
+import type { ChangeEvent } from 'react';
 import { useAppContext } from '../context/AppContext';
 import './styles/FilterContainer.css';
 
-const FilterContainer: React.FC = () => {
+const FilterContainer = () => {
   const {
     year,
     setYear,
@@ -14,15 +14,15 @@ const FilterContainer: React.FC = () => {
     setSelectedUserId,
   } = useAppContext();
 
-  const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleYearChange = (e: ChangeEvent<HTMLInputElement>) => {
     setYear(parseInt(e.target.value, 10));
   };
 
-  const handleMonthChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleMonthChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setMonth(parseInt(e.target.value, 10));
   };
 
-  const handleUserChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleUserChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSelectedUserId(e.target.value);
   };
 

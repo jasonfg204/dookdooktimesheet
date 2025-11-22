@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, type FormEvent } from 'react';
 import { collection, addDoc, doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase/firebaseConfig';
 import { useAppContext } from '../context/AppContext';
 import './styles/LogHoursPage.css';
 
-const LogHoursPage: React.FC = () => {
+const LogHoursPage = () => {
   const { user, editingEntryId, setEditingEntryId, setCurrentPage } = useAppContext();
 
   const [date, setDate] = useState('');
@@ -53,7 +53,7 @@ const LogHoursPage: React.FC = () => {
     setCurrentPage('entries-list');
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setMessage(null);
 
