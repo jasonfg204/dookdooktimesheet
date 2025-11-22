@@ -37,7 +37,7 @@ self.addEventListener('activate', event => {
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.filter(cacheName => {
-          return cacheName.startsWith('timesheet-') && !cacheName.endsWith(CACHE_VERSION);
+          return cacheName.startsWith('timesheet-') && !cacheName.includes(`-${CACHE_VERSION}`);
         }).map(cacheName => {
           return caches.delete(cacheName);
         })

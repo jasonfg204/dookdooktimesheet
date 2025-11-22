@@ -91,10 +91,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         setUsers(usersList);
       };
       fetchUsers();
+    } else if (user) {
+      setUsers([{ uid: user.uid, displayName: user.displayName || user.uid }]);
     } else {
       setUsers([]);
     }
-  }, [isAdmin]);
+  }, [isAdmin, user]);
 
   const value = {
     user,

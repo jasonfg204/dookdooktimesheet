@@ -18,7 +18,7 @@ interface Entry {
 }
 
 const EntriesListPage: React.FC = () => {
-  const { user, isAdmin, users, selectedUserId, year, month, setCurrentPage, setEditingEntryId } = useAppContext();
+  const { isAdmin, users, selectedUserId, year, month, setCurrentPage, setEditingEntryId } = useAppContext();
   const [entries, setEntries] = useState<Entry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -26,33 +26,18 @@ const EntriesListPage: React.FC = () => {
 
   // Effect to fetch entries based on the selected filters
   useEffect(() => {
-    if (!user) return;
-
     setLoading(true);
     
-    const entriesCollection = collection(db, 'entries');
     let q;
 
-    if (isAdmin) {
-      const queryConstraints = [
-        where('year', '==', year),
-        where('month', '==', month),
-        ...(selectedUserId !== 'all' ? [where('userId', '==', selectedUserId)] : []),
-        orderBy('date', 'desc'),
-        orderBy('startTime', 'desc')
-      ];
-      q = query(entriesCollection, ...queryConstraints);
-    } else {
-      // A non-admin should only ever be able to query their own entries
-      q = query(
-        entriesCollection,
-        where('userId', '==', user.uid),
-        where('year', '==', year),
-        where('month', '==', month),
-        orderBy('date', 'desc'),
-        orderBy('startTime', 'desc')
-      );
-    }
+    q = query(
+      collection(db, 'entries'),
+      where('year', '==', year),
+      where('month', '==', month),
+      ...(selectedUserId !== 'all' ? [where('userId', '==', selectedUserId)] : []),
+      orderBy('date', 'desc'),
+      orderBy('startTime', 'desc')
+    );
 
     const unsubscribe = onSnapshot(q,
       (snapshot) => {
@@ -72,7 +57,7 @@ const EntriesListPage: React.FC = () => {
     );
 
     return () => unsubscribe();
-  }, [user, selectedUserId, isAdmin, year, month, users]);
+  }, [selectedUserId, year, month, users]);
 
   const handleRecalculate = async () => {
     const targetUser = selectedUserId === 'all' 
