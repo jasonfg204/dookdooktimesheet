@@ -1,21 +1,29 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import '../styles/App.css';
 import '../styles/AppLayout.css';
 
 const ProtectedLayout = () => {
-  const { user, currentPage, setCurrentPage } = useAppContext();
+  const { user } = useAppContext();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   if (!user) {
     return <Navigate to="/login" replace />;
   }
 
+  const getButtonClass = (path: string) => {
+    // Check if the current path contains the given path.
+    // This is a simple way to handle nested routes if they exist.
+    return location.pathname.includes(path) ? 'active' : '';
+  };
+
   return (
     <>
       <nav className="navbar">
-        <button onClick={() => setCurrentPage('log-work')} className={currentPage === 'log-work' ? 'active' : ''}>Log Work</button>
-        <button onClick={() => setCurrentPage('summary')} className={currentPage === 'summary' ? 'active' : ''}>Summary</button>
-        <button onClick={() => setCurrentPage('entries-list')} className={currentPage === 'entries-list' ? 'active' : ''}>Entries List</button>
+        <button onClick={() => navigate('/log-work')} className={getButtonClass('/log-work')}>Log Work</button>
+        <button onClick={() => navigate('/summary')} className={getButtonClass('/summary')}>Summary</button>
+        <button onClick={() => navigate('/entries-list')} className={getButtonClass('/entries-list')}>Entries List</button>
       </nav>
       <div className="app-content-container">
         <Outlet />

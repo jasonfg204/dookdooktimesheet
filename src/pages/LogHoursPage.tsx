@@ -1,11 +1,13 @@
 import { useState, useEffect, type FormEvent } from 'react';
 import { collection, addDoc, doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 import { db } from '../firebase/firebaseConfig';
 import { useAppContext } from '../context/AppContext';
 import './styles/LogHoursPage.css';
 
 const LogHoursPage = () => {
-  const { user, editingEntryId, setEditingEntryId, setCurrentPage } = useAppContext();
+  const { user, editingEntryId, setEditingEntryId } = useAppContext();
+  const navigate = useNavigate();
 
   const [date, setDate] = useState('');
   const [startTime, setStartTime] = useState('');
@@ -50,7 +52,7 @@ const LogHoursPage = () => {
   const handleCancel = () => {
     clearForm();
     setEditingEntryId(null);
-    setCurrentPage('entries-list');
+    navigate('/entries-list');
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -209,3 +211,4 @@ const LogHoursPage = () => {
 };
 
 export default LogHoursPage;
+

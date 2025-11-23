@@ -4,8 +4,6 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, setDoc, collection, getDocs } from 'firebase/firestore';
 import { auth, db } from '../firebase/firebaseConfig';
 
-export type Page = 'log-work' | 'summary' | 'entries-list';
-
 interface UserData {
   uid: string;
   displayName: string;
@@ -23,8 +21,6 @@ interface AppContextType {
   setYear: Dispatch<SetStateAction<number>>;
   month: number;
   setMonth: Dispatch<SetStateAction<number>>;
-  currentPage: Page;
-  setCurrentPage: Dispatch<SetStateAction<Page>>;
   editingEntryId: string | null;
   setEditingEntryId: Dispatch<SetStateAction<string | null>>;
 }
@@ -39,7 +35,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [selectedUserId, setSelectedUserId] = useState<'all' | string>('all');
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth() + 1);
-  const [currentPage, setCurrentPage] = useState<Page>('log-work');
   const [editingEntryId, setEditingEntryId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -110,8 +105,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     setYear,
     month,
     setMonth,
-    currentPage,
-    setCurrentPage,
     editingEntryId,
     setEditingEntryId,
   };
